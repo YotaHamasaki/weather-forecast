@@ -12,27 +12,28 @@ def send_line(ddd, telop, highlists, lowlists, row):
     messages = TextSendMessage(text=ddd.text + "\n" + telop + "\n" + "最高　" + highlists.text + "\n" + "最低　" + lowlists.text + "\n"+ "---------" + "\n" +row[1].text +"\n" + "~6  : " + row[3].text + "\n" + "~12 : " + row[5].text +"\n" + "~18 : " + row[7].text +"\n" + "~24 : " + row[9].text)
     line_bot_api.push_message(USER_ID, messages=messages)
     
-#天気サイトから欲しい情報を取得する
-url2 = "https://tenki.jp/forecast/3/16/4410/13112/"   #欲しい情報があるURLを指定
-res = requests.get(url2)                              #上記URL情報を取得する
-soup = BeautifulSoup(res.content, 'html.parser')      #取得した情報をhtmlで解析する
+def main()
+    #天気サイトから欲しい情報を取得する
+    url2 = "https://tenki.jp/forecast/3/16/4410/13112/"   #欲しい情報があるURLを指定
+    res = requests.get(url2)                              #上記URL情報を取得する
+    soup = BeautifulSoup(res.content, 'html.parser')      #取得した情報をhtmlで解析する
 
-# 以下各種情報を取得
-ddd = soup.find(class_="left-style")                  
+    # 以下各種情報を取得
+    ddd = soup.find(class_="left-style")                  
 
-telop = soup.find("p", class_="weather-telop").string
+    telop = soup.find("p", class_="weather-telop").string
 
-highlists = soup.find("dd",class_="high-temp temp")
+    highlists = soup.find("dd",class_="high-temp temp")
 
-lowlists = soup.find("dd",class_="low-temp temp")
+    lowlists = soup.find("dd",class_="low-temp temp")
 
-ttt = soup.find(class_="rain-probability")
+    ttt = soup.find(class_="rain-probability")
 
-row=[]
-for t in ttt:
-    row.append(t)
+    row=[]
+    for t in ttt:
+        row.append(t)
 
-send_line(ddd, telop, highlists, lowlists, row)
+    send_line(ddd, telop, highlists, lowlists, row)
 
 if __name__ == "__main__":
     main()
