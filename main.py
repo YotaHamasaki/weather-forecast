@@ -12,7 +12,7 @@ def send_line(ddd, telop, highlists, lowlists, row):
     messages = TextSendMessage(text=ddd.text + "\n" + telop + "\n" + "最高　" + highlists.text + "\n" + "最低　" + lowlists.text + "\n"+ "---------" + "\n" +row[1].text +"\n" + "~6  : " + row[3].text + "\n" + "~12 : " + row[5].text +"\n" + "~18 : " + row[7].text +"\n" + "~24 : " + row[9].text)
     line_bot_api.push_message(USER_ID, messages=messages)
     
-def main()
+def main():
     #天気サイトから欲しい情報を取得する
     url2 = "https://tenki.jp/forecast/3/16/4410/13112/"   #欲しい情報があるURLを指定
     res = requests.get(url2)                              #上記URL情報を取得する
