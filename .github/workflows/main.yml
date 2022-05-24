@@ -3,10 +3,9 @@ name: weather-forcast
 
 # 定期実行間隔
 on:
-  push:
-  #schedule:
+  schedule:
   #10:00
-  #- cron: '0 22 * * *'
+  - cron: '0 22 * * *'
 
 jobs:
   build:
